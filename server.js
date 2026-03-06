@@ -13,9 +13,8 @@ app.get('/', (req, res) => {
     console.log(`Connection detected! IP: ${ip}`);
     
     // Instead of redirecting, just send text to confirm it's working
-    res.send('Server is working! Your IP has been logged.');
+    res.send('Wanna Be!');
 });
-
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
