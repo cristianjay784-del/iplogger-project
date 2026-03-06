@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
-
-// Use the port Render assigns, or default to 3000
 const PORT = process.env.PORT || 3000;
 
-// Middleware to trust Render's proxy
+// This is the CRITICAL line for Render
 app.set('trust proxy', true);
 
 app.get('/', (req, res) => {
@@ -14,8 +12,8 @@ app.get('/', (req, res) => {
     // Log the connection to the Render dashboard
     console.log(`Connection detected! IP: ${ip}`);
     
-    // Redirect the user
-    res.redirect('https://www.google.com');
+    // Instead of redirecting, just send text to confirm it's working
+    res.send('Server is working! Your IP has been logged.');
 });
 
 app.listen(PORT, () => {
