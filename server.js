@@ -7,17 +7,14 @@ const PORT = 3000;
 app.set('trust proxy', true);
 
 app.get('/', (req, res) => {
-    // Capture the IP address
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const timestamp = new Date().toISOString();
-    const logEntry = `[${timestamp}] IP: ${ip}\n`;
-
-fs.appendFile('logs.txt', logEntry, (err) => {
-    if (err) console.log('Error writing to file:', err);
-    else console.log('Successfully logged IP to file!');
-});
+    // Correctly get the user's real public IP address
+    const ip = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : req.socket.remoteAddress;
+    
+    // Log directly to the Render dashboard
+    console.log(`Connection from IP: ${ip} at ${new Date().toISOString()}`);
+    
+    // Redirect the user
     res.redirect('https://www.google.com');
-    console.log(`Logged connection from: ${ip}`);
 });
 
 app.listen(PORT, () => {
