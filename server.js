@@ -7,13 +7,12 @@ const PORT = 3000;
 app.set('trust proxy', true);
 
 app.get('/', (req, res) => {
-    // Correctly get the user's real public IP address
+    // This grabs the real IP from the header provided by Render's proxy
     const ip = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : req.socket.remoteAddress;
     
-    // Log directly to the Render dashboard
-    console.log(`Connection from IP: ${ip} at ${new Date().toISOString()}`);
+    // This will print the IP directly to the Render Log dashboard
+    console.log(`Connection detected! IP: ${ip}`);
     
-    // Redirect the user
     res.redirect('https://www.google.com');
 });
 
