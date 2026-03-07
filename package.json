@@ -1,8 +1,8 @@
 {
-  "scripts": {
-    "start": "node \"my test app.js\""
-  },
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "scripts": {
+    "start": "node mytestapp.js"
   }
 }
